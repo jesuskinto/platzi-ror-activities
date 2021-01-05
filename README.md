@@ -1,24 +1,16 @@
-# README
+# Activity Organizer **ROR💎**
+**DEMO in  https://activities-platzi.herokuapp.com/**
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+🔴 This is a simple activity manager built with **ruby ​​on rails (ROR)**
 
-Things you may want to cover:
+with him you can:
+* Sign up.
+* Create private activities.
+* Associate participants so others can see your activities.
+* Edit and delete activities.
 
-* Ruby version
+## Images
+![screenshot App 1](https://raw.githubusercontent.com/jesuskinto/platzi-ror-activities/main/app/assets/images/demo_image.png)
 
-* System dependencies
+![screenshot App 2](https://raw.githubusercontent.com/jesuskinto/platzi-ror-activities/main/app/assets/images/demo_image_2.png)
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
