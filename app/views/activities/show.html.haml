@@ -1,0 +1,51 @@
+.tasks.show-page
+  .display-4.mt-3.mb-3
+    = "Activity"
+    %span.small= "[#{@activity.code}]"
+  %h2 Information
+  .card
+    .card-body
+      .table-responsive
+        %table.table.table-striped.table-borderless
+          %thead
+            %tr
+              %th Code
+              %th Name
+              %th Category
+              %th Owner
+          %tbody
+            %tr
+              %td= @activity.code
+              %td= @activity.name
+              %td= @activity.category.name
+              %td= @activity.owner.email
+        %table.table.table-striped.table-borderless
+          %thead
+            %tr
+              %th Description
+          %tbody
+            %tr
+              %td.font-weight-light= @activity.description
+      .task-participants
+        .task-participants-header
+          .font-weight-bold.text-uppercase= 'Participantes'
+        - @activity.participating_users.includes(:user).each do |participant|
+          .task-participant{ class: "task-participant--#{participant.role}" }
+            = image_tag "https://robohash.org/#{participant.user.email}?size=60x60", title: participant.user.email
+      = link_to t('common.edit'), edit_activity_path(@activity)
+      \|
+      = link_to t('common.back'), activities_path
+  %h2.mt-2.mb-2 Notes
+  .notes-container
+    .card
+      .card-body
+        - if @activity.notes.exists?
+          .notes
+            - @activity.notes.order(created_at: :asc).each do |note|
+              .note-element
+                = render 'activities/notes/note', note: note
+        - else
+          .notes
+        - if can? :add_notes, @activity
+          = simple_form_for Note.new, url: activity_notes_path(activity_id: @activity.id), remote: true do |f|
+            = f.input :body, label: false, placeholder: 'Escriba una nota', as: :string, input_html: { autocomplete: :off }

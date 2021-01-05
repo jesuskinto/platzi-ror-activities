@@ -1,0 +1,20 @@
+%h1
+  Hi
+  = @user.email
+  , Has a new activity
+
+%p
+  %b Name
+  = @activity.name
+
+%p
+  %b Description 
+  = @activity.description
+  
+%p
+  %b Category
+  = @activity.category.name
+  
+%p
+  %b Link
+  = link_to @activity.code, @activity

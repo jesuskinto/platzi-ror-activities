@@ -1,0 +1,11 @@
+---
+es:
+  common:
+    are_you_sure: Are you sure
+    destroy: Destroy
+    edit: Edit
+    show: Show
+  hello: Hola mundo
+  task:
+    errors:
+      invalid_due_date: Fecha invalida

@@ -1,0 +1,32 @@
+.tasks.index-page
+	.display-4 Activities
+	%p.text-muted.mb-2 
+		Then you will see the entire list of activities created, you can create a new task, edit it or delete it if you are the creator of it
+	.card.bg-gray
+		.card-body.pb-2
+			.tasks-container
+				- @activities.each do |activity|
+					.task-container
+						.task-info
+							.task-title
+								%span.small= "[##{activity.code}]"
+								= activity.name
+								%span.task-category
+									= activity.category.name
+							.task-description= activity.description
+							.task-dates
+								%b= activity.owner.email
+								= "creado el #{l activity.created_at, format: :long} / vence el #{activity.due_date}"
+						.task-interactions
+							.task-participants
+								- activity.participating_users.includes(:user).each do |participant|
+									.task-participant{ class: "task-participant--#{participant.role}" }
+										= image_tag "https://robohash.org/#{participant.user.email}?size=60x60", title: participant.user.email
+							.task-actions
+								.dropdown
+									%a#taskMenu{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown"}
+										.fas.fa-ellipsis-v
+									.dropdown-menu{"aria-labelledby" => "taskMenu"}
+										= link_to t('common.show'), activity, class: 'dropdown-item'
+										= link_to t('common.edit'), edit_activity_path(activity), class: 'dropdown-item'
+										= link_to t('common.destroy'), activity, :method => :delete, :data => { :confirm => t('common.are_you_sure') }, class: 'dropdown-item'
