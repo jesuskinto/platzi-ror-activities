@@ -41,6 +41,7 @@ class Activity < ApplicationRecord
   end
 
   def send_mail
+    return unless Rails.env.development?
     (participants + [owner]).each do |user|
       ParticipantMailer.with(user: user,  activity: self ).new_activity_email.deliver!
     end
